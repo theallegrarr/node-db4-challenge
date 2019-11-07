@@ -19,7 +19,10 @@ function getShoppingList(id){
 }
 
 function getInstructions(id){
-  return db('instructions').where({ recipe_id: id }).then(res => {
+  return db('instructions')
+          .where({ recipe_id: id })
+          .orderBy('step_number', 'asc')
+          .then(res => {
     return res;
   }).catch(err => console.log(err))
 }
