@@ -17,7 +17,18 @@ router.get('/', async (req, res) => {
 
 router.get('/:id/shoppinglist', async (req, res) => {
   try {
-    const list= await helpers.getShoppingList();
+    const list= await helpers.getShoppingList(req.params.id);
+
+    res.status(200).json(list);
+  } catch(err) {
+    console.log(err);
+    res.status(500).json({ message: 'failed to get shopping list'})
+  }
+})
+
+router.get('/:id/instructions', async (req, res) => {
+  try {
+    const list= await helpers.getInstructions(req.params.id);
 
     res.status(200).json(list);
   } catch(err) {

@@ -2,7 +2,8 @@ const db = require('../data/db-config');
 
 module.exports = {
   getRecipes,
-  getShoppingList
+  getShoppingList,
+  getInstructions
 }
 
 function getRecipes(){
@@ -11,8 +12,14 @@ function getRecipes(){
   }).catch(err => console.log(err))
 }
 
-function getShoppingList(){
-  return db('ingredients').where({ recipe_id: req.params.id }).then(res => {
+function getShoppingList(id){
+  return db('ingredients').where({ recipe_id: id }).then(res => {
+    return res;
+  }).catch(err => console.log(err))
+}
+
+function getInstructions(id){
+  return db('instructions').where({ recipe_id: id }).then(res => {
     return res;
   }).catch(err => console.log(err))
 }
